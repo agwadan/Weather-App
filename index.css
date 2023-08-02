@@ -1,0 +1,11 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#weatherForm {
+  margin-bottom: 1em;
+}
+
+#locationInput {
+  margin-right: 1em;
+}
