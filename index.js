@@ -1,9 +1,16 @@
-console.log("Hello World");
+console.log("Weather App");
+let isCelsius = true;
 
-const fetchData = async (event) => {
-  event.preventDefault(); //------------------- Prevent Default Loading of the page.
+let currentLocation = 'Kampala';
 
-  const location = document.getElementById('location-input').value;
+window.onload = () => {
+  fetchData(currentLocation);
+}
+
+const fetchData = async (location, event) => {
+  
+  if(event) event.preventDefault(); //------------------- Prevent Default Loading of the page.
+
   const weatherResultDiv = document.getElementById('weather-result');
 
   try {
@@ -17,8 +24,7 @@ const fetchData = async (event) => {
 
     const filteredData = filterResponse(dataCurrent, dataForecast);
 
-
-    console.log(filteredData);
+    /* Loop through the different forecast days and store it in a variable and later append it to the weatherResultDiv */
     const forecastHTML = filteredData.forecast.map(forecast => `
     <div class='forecast'>
       <h3>Date: ${forecast.date}</h3>
@@ -30,12 +36,13 @@ const fetchData = async (event) => {
       weatherResultDiv.innerHTML = 
      `
         <h2>${filteredData.location}</h2>
-        <p>Temperature: ${filteredData.temperature}</p>
+        <p>Temperature: ${ isCelsius ? filteredData.temperatureC : filteredData.temperatureF}</p>
         <p>Condition: ${filteredData.condition}</p>
         <img src= '${filteredData.imgUrl}'/>
 
         ${forecastHTML}
     `; 
+    
   } catch (error) {
     console.error('Error:', error);
     weatherResultDiv.textContent = 'Failed to retrieve weather data';
@@ -46,7 +53,8 @@ const filterResponse = (dataCurrent, dataForecast) => {
   
   filteredData = {
     location: `${dataCurrent.location.country} , ${dataCurrent.location.name}`,
-    temperature: dataCurrent.current.feelslike_c,
+    temperatureC: `${ dataCurrent.current.feelslike_c} <sup>o</sup>C`,
+    temperatureF: `${ dataCurrent.current.feelslike_f} <sup>o</sup>F`,
     condition: dataCurrent.current.condition.text,
     imgUrl: dataCurrent.current.condition.icon,
     forecast: [
@@ -72,4 +80,12 @@ const filterResponse = (dataCurrent, dataForecast) => {
   return filteredData;
 }
 
-document.getElementById('weather-form').addEventListener('submit',fetchData);
+document.getElementById('weather-form').addEventListener('submit', event => {
+  const location = document.getElementById('location-input').value;
+  fetchData(location, event);
+});
+
+document.getElementById('toggle').addEventListener('click', () => {
+  isCelsius = !isCelsius; //-------------------------------------------------- toggle between true and false
+  fetchData(currentLocation); //---------------------------------------------- fetch and display the data again with the new temperature unit
+});
