@@ -42,7 +42,7 @@ const fetchData = async (location, event) => {
 
         ${forecastHTML}
     `; 
-    
+
   } catch (error) {
     console.error('Error:', error);
     weatherResultDiv.textContent = 'Failed to retrieve weather data';
@@ -65,15 +65,14 @@ const filterResponse = (dataCurrent, dataForecast) => {
       },
       {
         date: dataForecast.forecast.forecastday[1].date,
-        condition: dataForecast.forecast.forecastday[1].day.text,
+        condition: dataForecast.forecast.forecastday[1].day.condition.text,
         imgUrl: dataForecast.forecast.forecastday[1].day.condition.icon
       },
       {
         date: dataForecast.forecast.forecastday[2].date,
-        condition: dataForecast.forecast.forecastday[2].day.text,
+        condition: dataForecast.forecast.forecastday[2].day.condition.text,
         imgUrl: dataForecast.forecast.forecastday[2].day.condition.icon
       }
-      
     ]
   }
   //console.log(filteredData);
