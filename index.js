@@ -14,11 +14,11 @@ const fetchData = async (location, event) => {
   const weatherResultDiv = document.getElementById('weather-result');
 
   try {
-    const resCurrent = await fetch(`http://api.weatherapi.com/v1/current.json?key=ba82869c357c4038ab682813230108&q=${location}`);
+    const resCurrent = await fetch(`https://api.weatherapi.com/v1/current.json?key=ba82869c357c4038ab682813230108&q=${location}`);
     const dataCurrent = await resCurrent.json();
 
     
-    const resForecast = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=ba82869c357c4038ab682813230108&q=${location}&days=3`);
+    const resForecast = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=ba82869c357c4038ab682813230108&q=${location}&days=3`);
     const dataForecast = await resForecast.json();
     
 
