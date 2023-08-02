@@ -68,8 +68,8 @@ const filterResponse = (dataCurrent, dataForecast) => {
 }
 
 document.getElementById('weather-form').addEventListener('submit', event => {
-  const location = document.getElementById('location-input').value;
-  fetchData(location, event);
+  currentLocation = document.getElementById('location-input').value;
+  fetchData(currentLocation, event);
 });
 
 document.getElementById('toggle').addEventListener('click', () => {
