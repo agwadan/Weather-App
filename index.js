@@ -57,23 +57,11 @@ const filterResponse = (dataCurrent, dataForecast) => {
     temperatureF: `${ dataCurrent.current.feelslike_f} <sup>o</sup>F`,
     condition: dataCurrent.current.condition.text,
     imgUrl: dataCurrent.current.condition.icon,
-    forecast: [
-      {
-        date: dataForecast.forecast.forecastday[0].date,
-        condition: dataForecast.forecast.forecastday[0].day.condition.text,
-        imgUrl: dataForecast.forecast.forecastday[0].day.condition.icon
-      },
-      {
-        date: dataForecast.forecast.forecastday[1].date,
-        condition: dataForecast.forecast.forecastday[1].day.condition.text,
-        imgUrl: dataForecast.forecast.forecastday[1].day.condition.icon
-      },
-      {
-        date: dataForecast.forecast.forecastday[2].date,
-        condition: dataForecast.forecast.forecastday[2].day.condition.text,
-        imgUrl: dataForecast.forecast.forecastday[2].day.condition.icon
-      }
-    ]
+    forecast: dataForecast.forecast.forecastday.map(day => ({ //-------------- Looping through the forecasted days to generate the info we need.
+      date: day.date,
+      condition: day.day.condition.text,
+      imgUrl: day.day.condition.icon
+    }))
   }
   //console.log(filteredData);
   return filteredData;
