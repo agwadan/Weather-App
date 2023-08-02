@@ -35,7 +35,7 @@ const fetchData = async (location, event) => {
     
       weatherResultDiv.innerHTML = 
      `
-        <h2>${filteredData.location}</h2>
+        <h2>${filteredData.location} today, ${new Date()}</h2>
         <p>Temperature: ${ isCelsius ? filteredData.temperatureC : filteredData.temperatureF}</p>
         <p>Condition: ${filteredData.condition}</p>
         <img src= '${filteredData.imgUrl}'/>
