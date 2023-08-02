@@ -108,7 +108,6 @@ button:hover {
   }
 
   .forecast {
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex: 1 0 30%;
