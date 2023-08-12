@@ -42,7 +42,9 @@ const fetchData = async (location, event) => {
         <p>Condition: ${filteredData.condition}</p>
         <img src= '${filteredData.imgUrl}'/>
         <h2>Forecast</h2>
-        ${forecastHTML}
+        <div class='forecast-container'>
+          ${forecastHTML}
+        </div>
     `; 
 
   } catch (error) {

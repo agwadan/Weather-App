@@ -84,11 +84,15 @@ button:hover {
   margin: 20px auto;
 }
 
+.forecast-container{
+  display: flex;
+}
+
 .forecast {
   display: flex;
   flex-direction: column;
   margin: 10px;
-  padding: 10px;
+  padding: 15px 3rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f9f9f9;
@@ -102,7 +106,7 @@ button:hover {
   }
 
   #weather-result {
-    max-width: 600px;
+    max-width: 1000px;
     flex-direction: column;
     flex-wrap: wrap;
   }
