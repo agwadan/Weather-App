@@ -30,6 +30,7 @@ const fetchData = async (location, event) => {
     <div class='forecast'>
       <h3>${forecast.date}</h3>
       <p>${forecast.condition}</p>
+      <p>${isCelsius ? forecast.temperatureC : forecast.temperatureF}</p>
       <img src='${forecast.imgUrl}'/>
     </div>
     `).join('');
@@ -65,6 +66,8 @@ const filterResponse = (dataCurrent, dataForecast) => {
     forecast: dataForecast.forecast.forecastday.map(day => ({ //-------------- Looping through the forecasted days to generate the info we need.
       date:  new Date(day.date).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
       condition: day.day.condition.text,
+      temperatureC: `${day.day.avgtemp_c}<sup>o</sup>C`,
+      temperatureF: `${day.day.avgtemp_f}<sup>o</sup>F`,
       imgUrl: day.day.condition.icon
     }))
   }
