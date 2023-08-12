@@ -26,8 +26,9 @@ const fetchData = async (location, event) => {
 
     /* Loop through the different forecast days and store it in a variable and later append it to the weatherResultDiv */
     const forecastHTML = filteredData.forecast.map(forecast => `
+    
     <div class='forecast'>
-      <h3>Date: ${forecast.date}</h3>
+      <h3>${forecast.date}</h3>
       <p>${forecast.condition}</p>
       <img src='${forecast.imgUrl}'/>
     </div>
@@ -39,7 +40,7 @@ const fetchData = async (location, event) => {
         <p>Temperature: ${ isCelsius ? filteredData.temperatureC : filteredData.temperatureF}</p>
         <p>Condition: ${filteredData.condition}</p>
         <img src= '${filteredData.imgUrl}'/>
-
+        <h2>Forecast</h2>
         ${forecastHTML}
     `; 
 
@@ -48,6 +49,10 @@ const fetchData = async (location, event) => {
     weatherResultDiv.textContent = 'Failed to retrieve weather data';
   }
 }
+
+
+/* This function filters all from all the data in the response from the api, and returns only what is needed
+___________________________________________________________________________________________________________ */
 
 const filterResponse = (dataCurrent, dataForecast) => {
   
@@ -58,11 +63,12 @@ const filterResponse = (dataCurrent, dataForecast) => {
     condition: dataCurrent.current.condition.text,
     imgUrl: dataCurrent.current.condition.icon,
     forecast: dataForecast.forecast.forecastday.map(day => ({ //-------------- Looping through the forecasted days to generate the info we need.
-      date: day.date,
+      date:  new Date(day.date).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
       condition: day.day.condition.text,
       imgUrl: day.day.condition.icon
     }))
   }
+
   //console.log(filteredData);
   return filteredData;
 }
