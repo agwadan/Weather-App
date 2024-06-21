@@ -49,7 +49,7 @@ const fetchData = async (location, event) => {
 
   } catch (error) {
     console.error('Error:', error);
-    weatherResultDiv.textContent = 'Failed to retrieve weather data';
+    weatherResultDiv.textContent = 'Unfortunately, we don\'t have your location';
   }
 }
 
